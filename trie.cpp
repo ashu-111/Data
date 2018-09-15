@@ -5,35 +5,35 @@ struct TrieNode{
     bool endOfWord;
 };
 
-struct Trie *getNode(){
-    struct Trie *tmp = new Trie;
+struct TrieNode *getNode(){
+    struct TrieNode *tmp = new TrieNode;
     tmp->endOfWord = false;
     for (int i = 0; i < 26; i++)
         tmp->children[i] = NULL;
     return tmp;                    
 }
 
-void insert(struct Trie *root, string word)
+void insert(struct TrieNode *root, string word)
 {
-    struct Trie *tmp = root;
+    struct TrieNode *tmp = root;
      for (int i = 0; i < word.length(); i++)
      {
-        int index = key[i]-'a';
+        int index = word[i]-'a';
         if(!tmp->children[index])
             tmp->children[index] = getNode();
         tmp = tmp->children[index];            
      }
      tmp->endOfWord = true;
-}
-bool search(stuct Trie *root,string word)
+};
+bool search(struct TrieNode *root,string word)
 {
-   stuct Trie *tmp=root;
-   for(int i=0; t<word.length;i++)
+   struct TrieNode *tmp=root;
+   for(int i=0; i<word.length();i++)
    {
-       int index=key[i]-'a';
+       int index=word[i]-'a';
        if(!tmp->children[index])
-          return False
+          return false;
         tmp=tmp->children[index] ; 
    }
-   return (temp != NULL && temp->isEndOfWord);
+   return (tmp != NULL && tmp->endOfWord);
 }

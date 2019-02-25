@@ -1,10 +1,5 @@
 #include<bits/stdc++.h>
 using namespace std;
-
-
-
-
-
 struct node{
     long data;
     long rank;
@@ -31,13 +26,13 @@ node* findset1(node* n)
 }
 long findset(long d)
 {
-    return findset1(mp[d])->data;
+    return findset1(map[d])->data;
 }
 
 bool union1(long d1,long d2)
 {
-    node* n1=findset1(mp[d1]);
-    node* n2=findset1(mp[d2]);
+    node* n1=findset1(map[d1]);
+    node* n2=findset1(map[d2]);
     if(n1->data==n2->data)
         return false;
     if(n1->rank>=n2->rank)

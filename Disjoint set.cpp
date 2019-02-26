@@ -6,14 +6,14 @@ struct node{
     node* parent;
 };
 
-unordered_map<long,node*>map;
+unordered_map<long,node*>mp;
 void make_set(long Data)
 {
     node* n=(node*)malloc(sizeof(node*));
     n->data=Data;
     n->rank=0;
     n->parent=n;
-    map.insert({Data,n});
+    mp.insert({Data,n});
     return;
 }
 node* findset1(node* n)
@@ -26,13 +26,13 @@ node* findset1(node* n)
 }
 long findset(long d)
 {
-    return findset1(map[d])->data;
+    return findset1(mp[d])->data;
 }
 
 bool union1(long d1,long d2)
 {
-    node* n1=findset1(map[d1]);
-    node* n2=findset1(map[d2]);
+    node* n1=findset1(mp[d1]);
+    node* n2=findset1(mp[d2]);
     if(n1->data==n2->data)
         return false;
     if(n1->rank>=n2->rank)
@@ -44,6 +44,7 @@ bool union1(long d1,long d2)
         n1->parent=n2;
     return true;
 }
+
 /*
 int main()
 {

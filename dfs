@@ -1,0 +1,39 @@
+#include<bits/stdc++.h>
+using namespace std;
+int dfs(vector<list<int>>g,int sr)
+{
+    vector<bool>vis(g.size(),false);
+    stack<int>s;
+    s.push(sr);
+    vis[sr]=true;
+    list<int>::iterator i;
+    while(!s.empty())
+    {
+        int l=s.top();
+        s.pop();
+        cout<<l<<" ";
+        for(i=g[l].begin();i!=g[sr].end();i++)
+        {
+          if(!vis[*i])
+                s.push(*i);
+            vis[*i] = true;
+        }
+    }
+    
+}
+int main()
+{
+    vector<list<int>>g;
+    int v,e,sr,dec;
+    cin>>v>>e;
+    g.resize(v);
+    while(e--)
+    {
+        cin>>sr>>dec;
+        g[sr].push_back(dec);
+        g[dec].push_back(sr);
+    }
+    cin>>sr;
+    dfs(g,sr);
+    return 0;
+}

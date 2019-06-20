@@ -1,0 +1,47 @@
+#include<bits/stdc++.h>
+using namespace std;
+void topodfs(vector<list<int>>g,vector<bool>&visited,int src,list<int>&toposort)
+{
+    if(!visited[src])
+    {
+        visited[src]=true;
+        for(list<int>::iterator itr = g[src].begin();itr != g[src].end();itr++)
+        {
+            topodfs(g,visited,*itr,toposort);
+        }
+        toposort.push_front(src);
+    }
+}
+list<int>toposorted(vector<list<int>>g)
+{
+    list<int>toposort;
+    vector<bool>visited(g.size(),false);
+    for(int src=0;src<g.size();src++)
+    {
+        topodfs(g,visited,src,toposort);
+    }
+    return toposort;
+}
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        vector<list<int>>g;
+        int v,e,sr,dc;
+        cin>>v>>e;
+        g.resize(v);
+        while(e--)
+        {
+            cin>>sr>>dc;
+            g[sr].push_back(dc);
+        }
+        list<int>toposort=toposorted(g);
+        for(list<int>::iterator itr=toposort.begin();itr!=toposort.end();itr++)
+        {
+            cout<<*itr<<" ";
+        }
+        cout<<endl;
+    }
+}

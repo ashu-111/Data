@@ -1,0 +1,59 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef pair<int,int>p;
+int minimumdice(int arr[])
+{
+    queue<p>q;
+    q.push({1,0});
+   // visited[1]=true;
+    while(!q.empty())
+    {
+        pair<int,int>l=q.front();
+        q.pop();
+        int x=l.first;
+        int y=l.second;
+        // cout<<x<<" "<<y<<endl;
+        if(x==30)
+        {
+            return y;
+        }
+        
+        for(int i =x+1; i<=30 && i<=(x+6); i++)
+        {
+            if (arr[i]==0)
+            {
+                q.push({i,y+1});
+            }
+            else
+            q.push({arr[i],y+1});
+        }
+        
+    }
+    return -1;
+}
+int main()
+{
+    int t;
+    cin>>t;
+    int arr[31];
+    while(t--)
+    {
+        for(int i=1;i<=30;i++)
+        {
+            arr[i]=0;
+        }
+        int n;
+        cin>>n;
+        while(n--)
+        {
+            int a,b;
+            cin>>a>>b;
+            arr[a]=b;
+        }
+        // for(int i=1;i<=30;i++)
+        // {
+        //     cout<<arr[i]<<" ";
+        // }
+        cout<<minimumdice(arr);
+    }
+}

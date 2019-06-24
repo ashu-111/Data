@@ -1,0 +1,73 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+ {
+	int t;
+	cin>>t;
+	while(t--)
+	{
+	    int n,m;
+	    cin>>n,m;
+	    int graph[n][m];
+	    bool vis[n][m];
+	    for(int i=0;i<n;i++)
+	    {
+	        for(int j=0;j<m;j++)
+	        {
+	            cin>>graph[i][j];
+	            vis[i][j]=false;
+	        }
+	    }
+	    int r[4]={-1,1,0,0};
+	    int c[4]={0,0,-1,1};
+	    int count=0;
+	    for(int i=0;i<n;i++)
+	    {
+	        for(int j=0;j<m;j++)
+	        {
+	            if(graph[i][j]==2 && !vis[i][j])
+	            {
+	                vis[i][j]=true;
+	                if(graph[i-1][j]==1)
+	                {
+	                  graph[i-1][j]=2;
+	                }
+	                if(graph[i+1][j]==1)
+	                {
+	                  graph[i+1][j]=2;
+	                }
+	                if(graph[i][j-1]==1)
+	                {
+	                  graph[i][j-1]=2;
+	                }
+	                if(graph[i][j+1]==1)
+	                {
+	                  graph[i][j+1]=2;
+	                }
+	               count++; 
+	            }
+	        }
+	    }
+	    int flag=0;
+	    for(int i=0;i<n;i++)
+	    {
+	        for(int j=0;j<m;j++)
+	        {
+	            if(graph[i][j]==1)
+	            {
+	                flag=1;
+	                break;
+	            }
+	        }
+	    }
+	    if(flag==0)
+	    {
+	       cout<<count<<endl; 
+	    }
+	    else
+	    {
+	        cout<<-1<<endl;
+	    }
+	}
+	return 0;
+}

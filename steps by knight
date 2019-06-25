@@ -1,0 +1,58 @@
+#include<bits/stdc++.h>
+using namespace std;
+int sr,sc,dr,dc,n;
+int mini()
+{
+    int r[8]={-2, -1, 1, 2, -2, -1, 1, 2}; 
+    int c[8]= {-1, -2, -2, -1, 1, 2, 2, 1}; 
+    queue<pair<pair<int,int>,int>>q;
+    bool vis[n+1][n+1];
+    for(int i=1;i<=n;i++)
+    {
+        for(int j=1;j<=n;j++)
+        {
+            vis[i][j]=false;
+        }
+    }
+    q.push({{sr,sc},0});
+    vis[sr][sc]=true;
+    
+    while(!q.empty())
+    {
+        pair<pair<int,int>,int> cur=q.front();
+        q.pop();
+        sr=cur.first.first;
+        sc=cur.first.second;
+        int count=cur.second;
+        vis[sr][sc]=true;
+        if(sr==dr && sc==dc)
+        {
+            return count;
+        }
+        for(int k=0;k<8;k++)
+        {
+            int nextr=sr+r[k];
+            int nextc=sc+c[k];
+            if(nextr>0 && nextr<=n && nextc>0 && nextc<=n && vis[nextr][nextc]==false)
+            {
+                vis[nextr][nextc]=true;
+                q.push({{nextr,nextc},count+1});
+            }
+        }
+    }
+    return -1;
+}
+
+int main()
+ {
+	int t;
+	cin>>t;
+	while(t--)
+	{
+	    cin>>n;
+	    cin>>sr>>sc;
+	    cin>>dr>>dc;
+	    cout<<mini()<<endl;
+	}
+	return 0;
+}

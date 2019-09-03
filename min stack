@@ -1,0 +1,68 @@
+#include<bits/stdc++.h>
+using namespace std;
+struct mystack
+{
+    stack<int>s;
+    int minele;
+    void getmin()
+    {
+        if(s.empty())
+        {
+           cout<<"no minimum"<<endl; 
+        }
+        else
+        {
+            cout<<minele<<endl;
+        }
+    }
+    void pop()
+    {
+        if(s.empty())
+        {
+            cout<<"stack empty"<<endl;
+        }
+        int t=s.top();
+        s.pop();
+        if(t<minele)
+        {
+            minele=2*minele-t;
+        }
+    }
+    void push(int x)
+    {
+        if(s.empty())
+        {
+            minele=x;
+            s.push(x);
+            return;
+        }
+        else if(x<minele)
+        {
+            s.push(2*x-minele);
+            minele=x;
+        }
+        else
+        {
+            s.push(x);
+        }
+    }
+    
+};
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+       mystack m;
+      int n,l;
+      cin>>n;
+      for(int i=0;i<n;i++)
+      {
+          cin>>l;
+          
+          m.push(l);
+      }
+       m.getmin();
+    }
+}
